@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title></title>
+</head>
+
+<body>
+  <script>
+var globalCodeArray = [];
+var generatedCode = "";
+
+function generateACode(){
+   generatedCode = "";
+  //BASE 55 to avoid annoyance and confusion +/= I l 1 0 o O
+  //Provides 9,150,625
+  var possibleChars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+  for (var i = 0; i < 4; i++) {
+    generatedCode += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+  }
+  generatedCode = generatedCode;
+  return generatedCode;
+}
+
+
+function addCodeToArray(){
+  var localCode;
+  var localCodeArray = [];
+  localCode  = generatedCode;
+  localCodeArray = globalCodeArray;
+  if(!doesCodeExist(localCode,globalCodeArray)){
+    localCodeArray.push(localCode);
+    localCodeArray = globalCodeArray;
+    document.getElementById('codes').innerHTML += "<li>"+localCode+"</li>"
+    return localCodeArray;
+  }
+  else{
+    return false;
+  }
+}
+
+function doesCodeExist(value,array){
+  return array.indexOf(value) > -1;
+}
+
+function generateCodes(){
+  while (globalCodeArray.length < 256){
+    generateACode();
+    addCodeToArray()
+  }
+}
+  </script>
+  <ul id="codes"></ul>
+</body>
+
+</html>
